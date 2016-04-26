@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+
+LIVE_USER=pgp
+LIVE_LOCALE=en_US.UTF8
+
+LIVE_ARCH=i386
+LIVE_FLAVOUR=686
+#LIVE_ARCH=amd64
+
+LIVE_ISO="PGP Clean Room LiveCD `date +%Y-%m-%d`"
+
+RESOURCE_DIR=`pwd`/resources
+if [ ! -d "${RESOURCE_DIR}" ];
+then
+  echo "Can't find ${RESOURCE_DIR}, aborting."
+  exit 1
+fi
+
+WORK_DIR=`pwd`/build-cd
+if [ -e "${WORK_DIR}" ];
+then
+  echo "${WORK_DIR} already exists, aborting."
+  exit 1
+fi
+mkdir -p "${WORK_DIR}"
+cd "${WORK_DIR}"
+
+if [ ! -z "$LIVE_FLAVOUR" ];
+then
+  LB_PARAM_LINUX_FLAVOURS="--linux-flavours ${LIVE_FLAVOUR}"
+fi
+
+lb config \
+   --distribution jessie \
+   --debian-installer live \
+   --binary-images iso-hybrid \
+   --archive-areas "main" \
+   --bootappend-live "boot=live locales=$LIVE_LOCALE hostname=${LIVE_USER}live username=${LIVE_USER}" \
+   --architecture $LIVE_ARCH $LB_PARAM_LINUX_FLAVOURS \
+   --iso-volume "${LIVE_ISO}"
+
+mkdir -p config/package-lists
+
+#echo task-gnome-desktop > config/package-lists/desktop.list.chroot
+
+echo "rsync less cups hplip hplip-cups haveged gnupg2 gnupg-agent libpth20 pinentry-curses libccid pcscd scdaemon libksba8 paperkey opensc libgfshare-bin" > config/package-lists/custom.list.chroot
+
+rsync -ar "${RESOURCE_DIR}/" .
+
+# must do this with root, not just fakeroot
+sudo ../scripts/build-and-burn
+
+
