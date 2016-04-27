@@ -1,0 +1,76 @@
+#!/bin/bash
+set -e
+
+# Script for partitioning the SD cards, assembling the partitions
+# into RAID1, formatting the filesystem and mounting it for use.
+
+if [ $# -lt 3 ];
+then
+  echo "Please specify RAID mechanism <md|btrfs> and at least two devices."
+  exit 1
+fi
+
+RAID=$1
+shift
+
+MOUNT_POINT=/mnt/sd-private
+PGP_USER=pgp
+FS_LABEL=PRIVATE_MASTER
+
+echo "The following devices will be permanently erased: $@"
+echo "Type 'yes' to proceed"
+
+read
+
+if [ "x$REPLY" != xyes ];
+then
+  echo Aborting.
+  exit 1
+fi
+
+if [ $RAID = "md" ];
+then
+  PART_TYPE=fd
+else
+  PART_TYPE=L
+fi
+
+PART_NAMES=""
+for d in $@ ;
+do
+  sfdisk -uM $d << EOF
+,32,${PART_TYPE}
+EOF
+
+  PART_NAME=`sfdisk -l -q $d | grep ^/dev | head -1 | cut -f1 -d ' '`
+  PART_NAMES="$PART_NAMES $PART_NAME"
+done
+
+if [ $RAID = "md" ];
+then
+  MOUNT_DEV=/dev/md0
+  if [ -e $MOUNT_DEV ];
+  then
+    echo "$MOUNT_DEV already exists, aborting"
+    exit 1
+  fi
+  mdadm --create --verbose $MOUNT_DEV --level=mirror --raid-devices=$# $PART_NAMES
+  mkfs.ext4 -q -L ${FS_LABEL} $MOUNT_DEV
+else
+  mkfs.btrfs -f -L ${FS_LABEL} -M $PART_NAMES
+  MOUNT_DEV=`echo $PART_NAMES | cut -f1 -d ' '`
+fi
+
+echo "Device to mount is $MOUNT_DEV"
+
+if [ ! -e $MOUNT_POINT ];
+then
+  mkdir -p $MOUNT_POINT
+fi
+
+mount $MOUNT_DEV $MOUNT_POINT
+
+echo "Mounted at $MOUNT_POINT"
+
+chown $PGP_USER $MOUNT_POINT
+
