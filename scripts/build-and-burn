@@ -8,4 +8,4 @@ then
 fi
 
 lb build
-growisofs -dvd-compat -Z /dev/cdrw
+

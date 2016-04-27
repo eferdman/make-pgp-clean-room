@@ -45,11 +45,14 @@ mkdir -p config/package-lists
 
 #echo task-gnome-desktop > config/package-lists/desktop.list.chroot
 
-echo "rsync less cups hplip printer-driver-hpcups haveged gnupg2 gnupg-agent libpth20 pinentry-curses libccid pcscd scdaemon libksba8 paperkey opensc libgfshare-bin" > config/package-lists/custom.list.chroot
+echo "rsync pciutils less cups hplip printer-driver-hpcups haveged gnupg2 gnupg-agent libpth20 pinentry-curses libccid pcscd scdaemon libksba8 paperkey opensc libgfshare-bin strongswan-starter mdadm btrfs-tools" > config/package-lists/custom.list.chroot
 
 rsync -ar "${RESOURCE_DIR}/" .
 
 # must do this with root, not just fakeroot
 sudo ../scripts/build-and-burn
 
+cd ..
+
+ls -l ${WORK_DIR}/*.iso
 
