@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+
+if [ -z ${MOUNT_POINT} ];
+then
+  echo "Please set \$MOUNT_POINT"
+  exit 1
+fi
+
+if [ ! -e ${MOUNT_POINT}/CA_Properties ];
+then
+  echo "Couldn't find ${MOUNT_POINT}/CA_Properties"
+  echo "Please create it using the example from /usr/local/share/CA_Properties.example"
+  exit 1
+fi
+
+source ${MOUNT_POINT}/CA_Properties
+
+CA_KEY="${MOUNT_POINT}/${CA_NAME}Key.pem"
+CA_CERT="${MOUNT_POINT}/${CA_NAME}Cert.pem"
+
+umask 0177
+
+for f in ${CA_KEY} ${CA_CERT} ;
+do
+  if [ -e ${f} ];
+  then
+    echo "${f} exists, aborting"
+    exit 1
+  fi
+done
+
+# Create the CA
+
+echo "Creating CA root ..."
+
+pki --gen --type ${KEY_TYPE} --size ${KEY_SIZE} --outform pem > ${CA_KEY}
+pki --self --type ${KEY_TYPE} --digest ${CERT_DIGEST} \
+   --in ${CA_KEY} \
+   --dn "${CA_DN}" \
+   --lifetime ${CA_VALIDITY_DAYS} \
+   --ca --outform pem > ${CA_CERT}
+
+

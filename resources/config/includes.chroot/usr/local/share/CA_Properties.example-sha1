@@ -1,0 +1,13 @@
+
+CA_NAME="ca1"
+
+CA_VALIDITY_DAYS=`expr 365 '*' 5`
+CA_DN="CN=Example.org legacy CA (SHA-1)"
+
+SERVER_VALIDITY_DAYS=`expr 365 '*' 3`
+
+KEY_TYPE=rsa
+KEY_SIZE=2048
+CERT_DIGEST=sha1
+
+

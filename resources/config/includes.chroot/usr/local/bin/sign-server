@@ -1,0 +1,66 @@
+#!/bin/bash
+set -e
+set -x
+
+if [ $# -lt 1 ];
+then
+  echo "Please supply CSR file name and optionally specify validity period."
+  exit 1
+fi
+
+SERVER_CSR=$1
+if [ ! -e ${SERVER_CSR} ];
+then
+  echo "Can't find CSR file: ${SERVER_CSR}"
+  exit 1
+fi
+
+SUBJECT=`openssl req -noout -in ${SERVER_CSR} -subject | sed -e 's/^subject=//g'`
+DOMAIN=`echo $SUBJECT | sed -e 's!^.*/CN=\(.*\)!\1!g'`
+
+if [ -z ${MOUNT_POINT} ];
+then
+  echo "Please set \$MOUNT_POINT"
+  exit 1
+fi
+
+if [ ! -e ${MOUNT_POINT}/CA_Properties ];
+then
+  echo "Couldn't find ${MOUNT_POINT}/CA_Properties"
+  exit 1
+fi
+
+source ${MOUNT_POINT}/CA_Properties
+
+CA_KEY="${MOUNT_POINT}/${CA_NAME}Key.pem"
+CA_CERT="${MOUNT_POINT}/${CA_NAME}Cert.pem"
+
+if [ $# -gt 1 ];
+then
+  SERVER_VALIDITY_DAYS=$2
+fi
+
+PUBLIC_MOUNT=`dirname ${SERVER_CSR}`
+
+SERVER_CERT=${PUBLIC_MOUNT}/`date +%Y-%m-%d`_${DOMAIN}_cert.pem
+if [ -e ${SERVER_CERT} ];
+then
+  echo "Already exists: ${SERVER_CERT}"
+  echo "Aborting."
+  exit 1
+fi
+
+# Creating server certificate
+
+echo "Creating server cert ..."
+
+pki --pub --type pkcs10 --in ${SERVER_CSR} | \
+  ${IPSEC} pki --issue \
+  --cacert ${CA_CERT} --cakey ${CA_KEY} \
+  --digest ${CERT_DIGEST} \
+  --lifetime ${SERVER_VALIDITY_DAYS} \
+  --flag serverAuth --flag clientAuth \
+  --san ${DOMAIN} \
+  --dn "CN=${DOMAIN}" --outform pem > ${SERVER_CERT}
+
+

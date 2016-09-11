@@ -1,0 +1,19 @@
+
+CA_NAME="ca1"
+
+CA_VALIDITY_DAYS=`expr 365 '*' 7`
+CA_DN="CN=Example.org VPN CA"
+
+SERVER_VALIDITY_DAYS=`expr 365 '*' 3`
+
+# For ECC
+KEY_TYPE=ecdsa
+KEY_SIZE=384
+
+# For RSA
+KEY_TYPE=rsa
+KEY_SIZE=4096
+
+CERT_DIGEST=sha256
+
+
