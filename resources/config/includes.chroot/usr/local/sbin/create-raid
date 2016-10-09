@@ -68,9 +68,13 @@ then
   mkdir -p $MOUNT_POINT
 fi
 
-mount $MOUNT_DEV $MOUNT_POINT
+mount -o noexec $MOUNT_DEV $MOUNT_POINT
 
 echo "Mounted at $MOUNT_POINT"
 
 chown $PGP_USER $MOUNT_POINT
+
+umount $MOUNT_POINT
+
+mount-private
 

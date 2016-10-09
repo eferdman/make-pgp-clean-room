@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+
+if [ -e $HOME/.gnupg ];
+then
+  echo "$HOME/.gnupg already exists, aborting"
+  exit 1
+fi
+
+MOUNT_POINT=/mnt/sd-private
+PGP_USER=pgp
+FS_LABEL=PRIVATE_MASTER
+GNUPGHOME=${MOUNT_POINT}/gnupg-home
+
+mkdir -p $MOUNT_POINT
+
+mount -o noexec -L $FS_LABEL $MOUNT_POINT
+
+if [ ! -e ${GNUPGHOME} ];
+then
+  echo "Creating ${GNUPGHOME} ..."
+  mkdir -p ${GNUPGHOME}
+  chown $PGP_USER ${GNUPGHOME}
+fi
+
+if [ ! -e ${GNUPGHOME}/gpg.conf ];
+then
+  echo "Installing gpg.conf from sample ..."
+  cp /usr/local/etc/gpg.conf-sample ${GNUPGHOME}/gpg.conf
+fi
+
+ln -s ${GNUPGHOME} ~/.gnupg
+
+echo "Complete."
+
