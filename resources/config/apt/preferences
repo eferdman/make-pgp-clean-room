@@ -1,0 +1,5 @@
+Package: isc-dhcp-client
+Pin: version *
+Pin-Priority: -1
+
+
