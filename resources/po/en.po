@@ -1,0 +1,277 @@
+msgid "QUICK_GENERATE_TITLE"
+msgstr "Quick Generate Key"
+
+msgid "QUICK_GENERATE_TEXT"
+msgstr ""
+"This option creates the following:\n"
+"an RSA 4096 master key\n"
+"an RSA 2048 encryption subkey\n"
+"an RSA 2048 signing subkey\n"
+"You will be prompted for a UID and password"
+
+msgid "MASTER_KEY_ALGO_DEFAULT"
+msgstr "rsa4096"
+
+msgid "MASTER_EXPIRY_DEFAULT"
+msgstr "1y"
+
+msgid "SUBKEY_ALGO_DEFAULT"
+msgstr "rsa2048"
+
+msgid "SUBKEY_EXPIRY_DEFAULT"
+msgstr "6m"
+
+msgid "EXPIRY_TEXT"
+msgstr ""
+"Please specify how long the key should be valid.\n"
+"\t   0 = key does not expire\n"
+"\t <n> = key expires in n days\n"
+"\t<n>w = key expires in n weeks\n"
+"\t<n>m = key expires in n months\n"
+"\t<n>y = key expires in n years"
+
+msgid "PRIMARY_UID_TITLE"
+msgstr "Primary UID"
+
+msgid "PRIMARY_UID_TEXT"
+msgstr ""
+"Please enter your full name and email in the following format: "
+"Joe Tester <joe@tester.com>"
+
+msgid "ADD_UIDS_TITLE"
+msgstr "Additional UIDs"
+
+msgid "ADD_UIDS_TEXT"
+msgstr ""
+"Please enter any additional uids as a comma separated list. "
+"Example:"
+"  Barbara Streisand <barbara@streisand.com>, Barbara Streisand <barbara@beaches.com>"
+
+msgid "MASTER_KEY_ALGO_TITLE"
+msgstr "Primary Key Algorithm"
+
+msgid "MASTER_KEY_ALGO_TEXT"
+msgstr ""
+"Please specify the algorithm for the primary key."
+
+msgid "MASTER_KEY_USAGE_TITLE"
+msgstr "Master Key Usage"
+
+msgid "MASTER_KEY_USAGE_TEXT"
+msgstr "Please specify the usage for your primary key."
+
+msgid "MASTER_KEY_EXPIRY_TITLE"
+msgstr "Primary Key Expiration"
+
+# Subkey Strings
+
+msgid "SUBKEY_ALGO_TITLE"
+msgstr "Encryption Subkey Algorithm"
+
+msgid "SUBKEY_ALGO_TEXT"
+msgstr "Please specify the algorithm for the subkey you want:"
+
+msgid "SUBKEY_EXPIRY_TITLE"
+msgstr "Subkey Expiration"
+
+msgid "CUSTOM_SUBKEY_ALGO_TITLE"
+msgstr "Subkey Algorithm"
+
+msgid "CUSTOM_SUBKEY_ALGO_TEXT"
+msgstr "Please specify the algorithm for the subkey you want:"
+
+msgid "DSA_SUBKEY_LENGTH_TITLE"
+msgstr "Subkey Length"
+
+msgid "DSA_SUBKEY_LENGTH_TEXT"
+msgstr "Please specify a length for your subkey between 2048 - 3072 bits."
+
+msgid "RSA_SUBKEY_LENGTH_TITLE"
+msgstr "Subkey Length"
+
+msgid "RSA_SUBKEY_LENGTH_TEXT"
+msgstr "Please specify a length for your subkey between 2048 and 4096 bits."
+
+msgid "ELG_SUBKEY_LENGTH_TITLE"
+msgstr "Subkey Length"
+
+msgid "ELG_SUBKEY_LENGTH_TEXT"
+msgstr "Please specify a length for your subkey between 2048 and 4096 bits."
+
+msgid "SUBKEY_USAGE_TITLE"
+msgstr "Subkey Usage"
+
+msgid "SUBKEY_USAGE_TEXT"
+msgstr "Please specify the usage(s) for your subkey:"
+
+msgid "ECC_CURVE_TITLE"
+msgstr "Choose Elliptic Curve"
+
+msgid "ECC_CURVE_TEXT"
+msgstr "Please select which elliptic curve you want:"
+
+msgid "PASSWORD_TITLE"
+msgstr "Password"
+
+msgid "PASSWORD_TEXT"
+msgstr "Choose a Password for Your Master Key (must be a minimum of 12 characters)"
+
+msgid "CONF_PASSWORD_TITLE"
+msgstr "Password Confirmation"
+
+msgid "CONF_PASSWORD_TEXT"
+msgstr "Please Re-enter Your Password for Your Master Key"
+
+# SmartCard Strings
+
+msgid "SMARTCARD_YESNO_TITLE"
+msgstr "Smart Card"
+
+msgid "SMARTCARD_YESNO_TEXT"
+msgstr "Would you like to send your keys to a smartcard?"
+
+msgid "SMARTCARD_INIT_YESNO_TITLE"
+msgstr "Smart Card Initialization"
+
+msgid "SMARTCARD_INIT_YESNO_TEXT"
+msgstr "Would you like to initialize a smartcard with your name, language, and login?"
+
+msgid "SMARTCARD_SURNAME_TITLE"
+msgstr "Cardholder's Surname"
+
+msgid "SMARTCARD_SURNAME_TEXT"
+msgstr "Please enter the Cardholder's Surname" 
+
+msgid "SMARTCARD_NAME_TITLE"
+msgstr "Cardholder's First Name"
+
+msgid "SMARTCARD_NAME_TEXT"
+msgstr "Please enter the Cardholder's First Name"
+
+msgid "SMARTCARD_LANG_TITLE"
+msgstr "Cardholder's Preferred Language"
+
+msgid "SMARTCARD_LANG_TEXT"
+msgstr "Please enter the Preferred Language. E.g. en, fr, de"
+
+msgid "SMARTCARD_LOGIN_TITLE"
+msgstr "Cardholder's Login"
+
+msgid "SMARTCARD_LOGIN_TEXT"
+msgstr "Please enter the Cardholder's Login Name"
+
+msgid "ADMIN_PIN_YESNO_TITLE"
+msgstr "Change Admin PIN"
+
+msgid "ADMIN_PIN_YESNO_TEXT"
+msgstr "Would you like to set/change the Admin PIN of your smartcard?"
+
+msgid "OLD_ADMIN_PIN_TITLE"
+msgstr "Old Admin PIN"
+
+msgid "OLD_ADMIN_PIN_TEXT"
+msgstr "Please enter the old Admin PIN (default is 12345678)"
+
+msgid "OLD_ADMIN_PIN_DEFAULT"
+msgstr "12345678"
+
+msgid "OLD_ADMIN_PIN_CONF_TITLE"
+msgstr "Verify Old Admin PIN"
+
+msgid "OLD_ADMIN_PIN_CONF_TEXT"
+msgstr "Please re-enter your old Admin PIN"
+
+msgid "NEW_ADMIN_PIN_TITLE"
+msgstr "New Admin PIN"
+
+msgid "NEW_ADMIN_PIN_TEXT"
+msgstr "Please enter the new Admin PIN"
+
+msgid "NEW_ADMIN_PIN_CONF_TITLE"
+msgstr "Verify New Admin PIN"
+
+msgid "NEW_ADMIN_PIN_CONF_TEXT"
+msgstr "Please re-enter the new Admin PIN"
+
+msgid "USER_PIN_YESNO_TITLE"
+msgstr "Change User PIN"
+
+msgid "USER_PIN_YESNO_TEXT"
+msgstr "Would you like to set/change the User PIN on your smartcard?"
+
+msgid "OLD_USER_PIN_TITLE"
+msgstr "Old User PIN"
+
+msgid "OLD_USER_PIN_TEXT"
+msgstr "Please enter the old User PIN (default is 123456)"
+
+msgid "OLD_USER_PIN_DEFAULT"
+msgstr "123456"
+
+msgid "OLD_USER_PIN_CONF_TITLE"
+msgstr "Verify Old User PIN"
+
+msgid "OLD_USER_PIN_CONF_TEXT"
+msgstr "Please re-enter your old User PIN"
+
+msgid "NEW_USER_PIN_TITLE"
+msgstr "New PIN"
+
+msgid "NEW_USER_PIN_TEXT"
+msgstr "Please enter the new PIN"
+
+msgid "NEW_USER_PIN_CONF_TITLE"
+msgstr "Verify New PIN"
+
+msgid "NEW_USER_PIN_CONF_TEXT"
+msgstr "Please re-enter the new PIN"
+
+msgid "RESET_CODE_YESNO_TITLE"
+msgstr "Set Reset Code"
+
+msgid "RESET_CODE_YESNO_TEXT"
+msgstr "Would you like to set the reset code for your smartcard?"
+
+msgid "RESET_CODE_TITLE"
+msgstr "New Reset Code"
+
+msgid "RESET_CODE_TEXT"
+msgstr "Please enter the new Reset Code"
+
+msgid "RESET_CODE_CONF_TITLE"
+msgstr "Verify New Reset Code"
+
+msgid "RESET_CODE_CONF_TEXT"
+msgstr "Please re-enter the new Reset Code"
+
+## Devices
+
+msgid "GPG_HOME_DISK_TITLE"
+msgstr "GnuPG Home Directory"
+
+msgid "GPG_HOME_DISK_TEXT"
+msgstr "Select the USB memory device for the GnuPG home directory to point to:"
+
+msgid "BACKUP_DISK_TITLE"
+msgstr "Backup Drive"
+
+msgid "BACKUP_DISK_TEXT"
+msgstr "Select the USB memory device to use as a backup for your keyring:"
+
+msgid "PARTITION_CONFIRM_TITLE"
+msgstr "Confirm Partition Disk"
+
+msgid "PARTITION_CONFIRM_TEXT"
+msgstr "Do you really want to partition the selected disk(s)? Please note that all data on the following disks will be permanently erased:"
+
+msgid "RAID_MECHANISM_TITLE"
+msgstr "RAID Mechanism"
+
+msgid "RAID_MECHANISM_TEXT"
+msgstr "Please specify the RAID mechanism" 
+
+msgid "RAID_DEVICES_TITLE"
+msgstr "Raid Devices"
+
+msgid "RAID_DEVICES_TEXT"
+msgstr "Please specify at least two devices to partition as RAID 1"
